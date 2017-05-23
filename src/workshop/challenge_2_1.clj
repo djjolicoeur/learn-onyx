@@ -24,7 +24,20 @@
 
       ;; <<< BEGIN FILL ME IN >>>
 
- 
+      {:onyx/name :times-three
+       :onyx/fn ::times-three
+       :onyx/type :function
+       :onyx/batch-size batch-size
+       :onyx/batch-timeout batch-timeout
+       :onyx/doc "Multiplies :n in segment by 3"}
+
+      {:onyx/name :plus-fifty
+       :onyx/fn ::plus-fifty
+       :onyx/type :function
+       :onyx/batch-size batch-size
+       :onyx/batch-timeout batch-timeout
+       :onyx/doc "adds 50 to :n in segment"}
+
       ;; <<< END FILL ME IN >>>
 
       {:onyx/name :write-segments
