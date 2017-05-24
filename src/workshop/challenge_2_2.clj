@@ -24,6 +24,26 @@
 
       ;; <<< BEGIN FILL ME IN >>>
 
+      {:onyx/name :times
+       :onyx/fn ::times
+       :onyx/type :function
+       :onyx/batch-size batch-size
+       :onyx/batch-timeout batch-timeout
+       :onyx/params [::times.param]
+       :onyx/doc "Multiplies 3 by segment :n"
+       ::times.param 3}
+
+      {:onyx/name :plus
+       :onyx/fn ::plus
+       :onyx/type :function
+       :onyx/batch-size batch-size
+       :onyx/batch-timeout batch-timeout
+       :onyx/params [::plus.param]
+       :onyx/doc "Adds 50 to segment :n"
+       ::plus.param 50}
+
+
+
       ;; <<< END FILL ME IN >>>
 
       {:onyx/name :write-segments
