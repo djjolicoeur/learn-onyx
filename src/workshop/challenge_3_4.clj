@@ -24,6 +24,14 @@
 
       ;; <<< BEGIN FILL ME IN PART 1 >>>
 
+      {:onyx/name :capitalize-names
+       :onyx/fn ::capitalize-names
+       :onyx/type :function
+       :onyx/batch-size batch-size
+       :onyx/batch-timeout batch-timeout
+       :onyx/batch-fn? true
+       :onyx/doc "Capitalize :name of each segment"}
+
       ;; <<< END FILL ME IN PART 1 >>>
 
       {:onyx/name :write-segments
@@ -38,6 +46,11 @@
 ;;; Functions ;;;
 
 ;; <<< BEGIN FILL ME IN PART 2 >>>
+
+(defn capitalize-names
+  [segments]
+  (->> segments
+       (mapv (fn [segment] (update segment :name clojure.string/capitalize)))))
 
 ;; <<< END FILL ME IN PART 2 >>>
 

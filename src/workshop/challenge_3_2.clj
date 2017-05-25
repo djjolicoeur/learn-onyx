@@ -41,6 +41,11 @@
 
 ;; <<< BEGIN FILL ME IN >>>
 
+(defn split-sentence [segment]
+  (->> #"\s"
+       (clojure.string/split (:sentence segment))
+       (map (fn [x] {:word x}))))
+
 
 
 ;; <<< END FILL ME IN >>>

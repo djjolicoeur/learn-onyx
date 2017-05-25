@@ -61,6 +61,18 @@
 
 ;; <<< BEGIN FILL ME IN >>>
 
+(defn upper-case [segment]
+  (update segment  :name clojure.string/upper-case))
+
+(defn interposer [char]
+  (fn [name]
+    (->> name
+         (interpose char)
+         (apply str))))
+
+(defn interpose-char [char segment]
+  (update segment :name (interposer char)))
+
 ;; <<< END FILL ME IN >>>
 
 ;;; Lifecycles ;;;

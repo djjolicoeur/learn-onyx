@@ -4,8 +4,9 @@
 ;;; Workflows ;;;
 
 (def workflow
-  [[:read-segments :transform-name]
-   [:transform-name :write-segments]])
+  [[:read-segments :prepend-tilde]
+   [:prepend-tilde :append-question-mark]
+   [:append-question-mark :write-segments]])
 
 ;;; Catalogs ;;;
 
@@ -23,6 +24,26 @@
 
       ;; <<< BEGIN FILL ME IN PART 1 >>>
 
+      {:onyx/name :prepend-tilde
+       :onyx/fn ::bookend-char
+       :onyx/type :function
+       :onyx/batch-size batch-size
+       :onyx/batch-timeout batch-timeout
+       ::bookend-char.op :prepend
+       ::bookend-char.char "~"
+       :onyx/params [::bookend-char.op ::bookend-char.char]
+       :onyx/doc "prepend ~ to the segment name"}
+
+      {:onyx/name :append-question-mark
+       :onyx/fn ::bookend-char
+       :onyx/type :function
+       :onyx/batch-size batch-size
+       :onyx/batch-timeout batch-timeout
+       ::bookend-char.op :append
+       ::bookend-char.char "?"
+       :onyx/params [::bookend-char.op ::bookend-char.char]
+       :onyx/doc "append ? to the segment name"}
+
       ;; <<< END FILL ME IN PART 1 >>>
 
       {:onyx/name :write-segments
@@ -37,6 +58,15 @@
 ;;; Functions ;;;
 
 ;; <<< BEGIN FILL ME IN PART 2 >>>
+
+(defn bookend-char [op char segment]
+  (condp = op
+    :prepend (update segment :name #(apply str (cons char %)))
+    :append (update segment :name #(apply str (cons % char)))
+    (throw (ex-info "Invalid operator!"
+                    {:causes #{:invalid-op}
+                     :valid-ops #{:append :prepend}
+                     :op op}))))
 
 ;; <<< END FILL ME IN  PART 2 >>>
 
